@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -33,11 +34,28 @@ class AppFixtures extends Fixture
 
             $client = new Client();
 
-            $client->setLogin('azerty-' . $i);
-            $client->setEmail('azerty-' . $i . '@gmail.com');
+            $client->setLogin('client-' . $i);
+            $client->setEmail('client-' . $i . '@gmail.com');
             $client->setPassword(
                 $this->passwordEncoder->encodePassword($client, 'azerty')
             );
+
+
+            // 0-3 Users by Client
+            $numberOfUser = random_int(0, 4);
+            $userCount = 0;
+            while ($userCount < $numberOfUser) {
+                $user = new User();
+
+                $nameByClientAndCount = $client->getLogin() . '.' . $userCount;
+                $user->setFirstName('User-' . $nameByClientAndCount);
+                $user->setLastName('Owned by ' . $client->getLogin());
+                $user->setEmail('user-' . $nameByClientAndCount . '@gmail.com');
+                $user->setClient($client);
+
+                $manager->persist($user);
+                $userCount++;
+            }
             $manager->persist($client);
         }
 
