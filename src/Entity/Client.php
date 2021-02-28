@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ApiResource(
  *     shortName="infos",
  *     collectionOperations={},
- *     itemOperations={"get"}
+ *     itemOperations={"get"={"security"="is_granted('get', object)"}}
  * )
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
