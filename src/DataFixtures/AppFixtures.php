@@ -34,17 +34,23 @@ class AppFixtures extends Fixture
             $client = new Client();
 
             $client->setLogin('azerty-' . $i);
+            $client->setEmail('azerty-' . $i . '@gmail.com');
             $client->setPassword(
                 $this->passwordEncoder->encodePassword($client, 'azerty')
             );
             $manager->persist($client);
         }
 
+
         // products
+        $cents = '99';
         foreach (self::$productsList as $productName) {
+
+            $price = random_int(500, 1500);
 
             $product = new Product();
             $product->setName($productName);
+            $product->setPrice($price . '.' . $cents);
             $product->setAvailability(true);
             $manager->persist($product);
         }
