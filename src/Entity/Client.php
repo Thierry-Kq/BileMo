@@ -2,18 +2,24 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     shortName="infos",
+ *     collectionOperations={},
+ *     itemOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
 class Client implements UserInterface
 {
     /**
+     * @ApiProperty(identifier=false)
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +27,7 @@ class Client implements UserInterface
     private $id;
 
     /**
+     * @ApiProperty(identifier=true)
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $login;
