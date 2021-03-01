@@ -6,6 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ApiResource(
@@ -13,6 +15,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     denormalizationContext={"groups"={"user:write"}}
  * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Cet email est déjà utilisé."
+ * )
  */
 class User
 {
@@ -29,6 +35,13 @@ class User
      * @ORM\Column(type="string", length=255)
      *
      * @Groups({"client:read", "user:read", "user:write"})
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Le firstName foit faire minimum {{ limit }} caractères de long",
+     *      maxMessage = "Le firstName foit faire maximum {{ limit }} caractères de long"
+     * )
      */
     private $firstName;
 
@@ -36,6 +49,13 @@ class User
      * @ORM\Column(type="string", length=255)
      *
      * @Groups({"client:read", "user:read", "user:write"})
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Le lastName foit faire minimum {{ limit }} caractères de long",
+     *      maxMessage = "Le lastName foit faire maximum {{ limit }} caractères de long"
+     * )
      */
     private $lastName;
 
@@ -43,6 +63,9 @@ class User
      * @ORM\Column(type="string", length=255)
      *
      * @Groups({"client:read", "user:read", "user:write"})
+     *
+     * @Assert\NotBlank(message = "L'email doit être renseigné.")
+     * @Assert\Email(message = "L'email '{{ value }}' n'est pas un email valide.")
      */
     private $email;
 
