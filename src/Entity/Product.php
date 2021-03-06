@@ -7,7 +7,10 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ * )
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
@@ -28,6 +31,11 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $availability;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $price;
 
     public function getId(): ?int
     {
@@ -54,6 +62,18 @@ class Product
     public function setAvailability(bool $availability): self
     {
         $this->availability = $availability;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
