@@ -5,14 +5,18 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *     normalizationContext={"groups"={"client:read"}},
  *     shortName="infos",
  *     collectionOperations={},
- *     itemOperations={"get"={"security"="is_granted('get', object)"}}
+ *     itemOperations={"get"={"security"="is_granted('get', object)"}},
  * )
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
@@ -23,17 +27,23 @@ class Client implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @Groups("client:read")
      */
     private $id;
 
     /**
      * @ApiProperty(identifier=true)
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Groups("client:read")
      */
     private $login;
 
     /**
      * @ORM\Column(type="array")
+     *
+     * @Groups("client:read")
      */
     private $roles = [];
 
@@ -45,8 +55,22 @@ class Client implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"client:read"})
      */
     private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="client", orphanRemoval=true)
+     *
+     * @Groups({"client:read"})
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +161,36 @@ class Client implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getClient() === $this) {
+                $user->setClient(null);
+            }
+        }
 
         return $this;
     }
