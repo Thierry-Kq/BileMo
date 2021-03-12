@@ -41,8 +41,8 @@ class AppFixtures extends Fixture
             );
 
 
-            // 0-3 Users by Client
-            $numberOfUser = random_int(0, 4);
+            // 5 Users by Client
+            $numberOfUser = 5;
             $userCount = 0;
             while ($userCount < $numberOfUser) {
                 $user = new User();

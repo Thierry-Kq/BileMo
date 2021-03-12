@@ -140,6 +140,9 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "monolog/monolog": {
+        "version": "2.2.0"
+    },
     "namshi/jose": {
         "version": "7.2.3"
     },
@@ -188,6 +191,9 @@
     "symfony/asset": {
         "version": "v5.2.3"
     },
+    "symfony/browser-kit": {
+        "version": "v5.2.4"
+    },
     "symfony/cache": {
         "version": "v5.2.3"
     },
@@ -217,6 +223,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v5.2.3"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.2.4"
     },
     "symfony/dotenv": {
         "version": "v5.2.3"
@@ -271,6 +280,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.2.4"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },
@@ -289,8 +301,41 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/monolog-bridge": {
+        "version": "v5.2.5"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "d7249f7d560f6736115eee1851d02a65826f0a56"
+        },
+        "files": [
+            "config/packages/dev/monolog.yaml",
+            "config/packages/prod/deprecations.yaml",
+            "config/packages/prod/monolog.yaml",
+            "config/packages/test/monolog.yaml"
+        ]
+    },
     "symfony/orm-pack": {
         "version": "v2.1.0"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "bf16921ef8309a81d9f046e9b6369c46bcbd031f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.22.1"
