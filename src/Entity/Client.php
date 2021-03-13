@@ -42,8 +42,6 @@ class Client implements UserInterface
 
     /**
      * @ORM\Column(type="array")
-     *
-     * @Groups("client:read")
      */
     private $roles = [];
 

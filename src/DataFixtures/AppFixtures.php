@@ -41,8 +41,8 @@ class AppFixtures extends Fixture
             );
 
 
-            // 5 Users by Client
-            $numberOfUser = 5;
+            // 50 Users by Client
+            $numberOfUser = 50;
             $userCount = 0;
             while ($userCount < $numberOfUser) {
                 $user = new User();
