@@ -31,6 +31,6 @@ class ClientTest extends ApiTestCase
                 'auth_bearer' => $token,
             ]
         );
-        self::assertCount(5, $response->toArray()['users']);
+        self::assertCount(50, $response->toArray()['users']);
     }
 }

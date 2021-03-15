@@ -37,7 +37,8 @@ class UserTest extends ApiTestCase
                 'auth_bearer' => $token,
             ]
         );
-        self::assertCount(5, $response->toArray()['hydra:member']);
+        self::assertEquals(50, $response->toArray()['hydra:totalItems']);
+        self::assertCount(10, $response->toArray()['hydra:member']);
 
         //
         $response = $client->request(
@@ -53,7 +54,7 @@ class UserTest extends ApiTestCase
         //
         $response = $client->request(
             'GET',
-            'v1/users/10',
+            'v1/users/100',
             [
                 'auth_bearer' => $token,
             ]

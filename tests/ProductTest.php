@@ -13,7 +13,6 @@ class ProductTest extends ApiTestCase
         $client = static::createClient();
 
         $urls = ['v1/products', 'v1/products/1'];
-//        $urls = ['v1/products/1'];
         foreach ($urls as $url) {
             $response = $client->request('GET', $url);
             self::assertResponseStatusCodeSame('401');
@@ -34,7 +33,9 @@ class ProductTest extends ApiTestCase
                 'auth_bearer' => $token,
             ]
         );
-        self::assertCount(4, $response->toArray()['hydra:member']);
+
+        self::assertEquals(23, $response->toArray()['hydra:totalItems']);
+        self::assertCount(10, $response->toArray()['hydra:member']);
 
         //
         $response = $client->request(

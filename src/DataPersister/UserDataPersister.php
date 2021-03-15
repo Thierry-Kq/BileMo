@@ -33,7 +33,6 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         if (isset($context['item_operation_name'])) {
             $this->checkAuthClient($data, $context);
         }
-        // todo : if not new user, no need to setClient
         $client = $this->security->getUser();
 
         $data->setClient($client);
