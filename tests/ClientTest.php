@@ -14,7 +14,7 @@ class ClientTest extends ApiTestCase
     {
         $client = static::createClient();
 
-        $response = $client->request('GET', '/infos/' . $this->login);
+        $response = $client->request('GET', 'v1/infos/' . $this->login);
         self::assertResponseStatusCodeSame('401');
     }
 
@@ -26,7 +26,7 @@ class ClientTest extends ApiTestCase
 
         $response = $client->request(
             'GET',
-            '/infos/' . $this->login,
+            'v1/infos/' . $this->login,
             [
                 'auth_bearer' => $token,
             ]

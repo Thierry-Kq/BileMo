@@ -15,11 +15,11 @@ class UserTest extends ApiTestCase
         $client = static::createClient();
 
         //
-        $response = $client->request('GET', 'users');
+        $response = $client->request('GET', 'v1/users');
         self::assertResponseStatusCodeSame('403');
 
         //
-        $response = $client->request('GET', 'users/1');
+        $response = $client->request('GET', 'v1/users/1');
         self::assertResponseStatusCodeSame('401');
     }
 
@@ -32,7 +32,7 @@ class UserTest extends ApiTestCase
         //
         $response = $client->request(
             'GET',
-            '/users',
+            '/v1/users',
             [
                 'auth_bearer' => $token,
             ]
@@ -42,7 +42,7 @@ class UserTest extends ApiTestCase
         //
         $response = $client->request(
             'GET',
-            '/users/1',
+            'v1/users/1',
             [
                 'auth_bearer' => $token,
             ]
@@ -53,7 +53,7 @@ class UserTest extends ApiTestCase
         //
         $response = $client->request(
             'GET',
-            '/users/10',
+            'v1/users/10',
             [
                 'auth_bearer' => $token,
             ]
@@ -64,7 +64,7 @@ class UserTest extends ApiTestCase
         $user = ['firstName' => 'azerty', 'lastName' => 'azerty', 'email' => 'azerty@gmail.com'];
         $response = $client->request(
             'PATCH',
-            '/users/4',
+            'v1/users/4',
             [
                 'auth_bearer' => $token,
                 'json' => $user,

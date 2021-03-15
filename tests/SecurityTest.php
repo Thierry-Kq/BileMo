@@ -44,13 +44,13 @@ class SecurityTest extends ApiTestCase
         $client = static::createClient();
 
         foreach ($methods as $method) {
-            $response = $client->request($method, 'infos/client-0');
+            $response = $client->request($method, 'v1/infos/client-0');
             self::assertResponseStatusCodeSame('405');
 
-            $response = $client->request($method, 'products');
+            $response = $client->request($method, 'v1/products');
             self::assertResponseStatusCodeSame('405');
 
-            $response = $client->request($method, 'products/1');
+            $response = $client->request($method, 'v1/products/1');
             self::assertResponseStatusCodeSame('405');
         }
     }

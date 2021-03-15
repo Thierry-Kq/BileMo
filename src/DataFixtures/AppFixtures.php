@@ -14,9 +14,28 @@ class AppFixtures extends Fixture
 
     private static $productsList = [
         'Aphone 9',
+        'Aphone 9-X',
+        'Aphone 10-2',
+        'Aphone 10-2-pro',
         'Pamsung 11',
+        'Pamsung 12',
+        'Pamsung 12-pro',
         'Rokia 6.1',
+        'Rokia 6.3',
+        'Rokia 7',
+        'Rokia 7 mini',
         'Xmeria 12',
+        'Xmeria 13',
+        'Xmeria 14',
+        'Xmeria 15',
+        'Papple 12',
+        'Papple 13',
+        'Papple 14',
+        'Papple 15',
+        'Papple 17',
+        'low-Mo',
+        'low-Mo pro',
+        'low-Mo mini',
     ];
 
     private $passwordEncoder;

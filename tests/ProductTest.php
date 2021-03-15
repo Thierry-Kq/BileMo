@@ -12,7 +12,8 @@ class ProductTest extends ApiTestCase
     {
         $client = static::createClient();
 
-        $urls = ['/products', '/products/1'];
+        $urls = ['v1/products', 'v1/products/1'];
+//        $urls = ['v1/products/1'];
         foreach ($urls as $url) {
             $response = $client->request('GET', $url);
             self::assertResponseStatusCodeSame('401');
@@ -28,7 +29,7 @@ class ProductTest extends ApiTestCase
         //
         $response = $client->request(
             'GET',
-            '/products',
+            'v1/products',
             [
                 'auth_bearer' => $token,
             ]
@@ -38,7 +39,7 @@ class ProductTest extends ApiTestCase
         //
         $response = $client->request(
             'GET',
-            '/products/1',
+            'v1/products/1',
             [
                 'auth_bearer' => $token,
             ]
