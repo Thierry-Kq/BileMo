@@ -14,9 +14,3 @@ api_platform:
 
     version: '1.0.0'
     show_webby: false
-    openapi:
-        contact:
-            name:
-                'Thierry Delongueville'
-            email:
-                'thierry.delongueville@gmail.com'
