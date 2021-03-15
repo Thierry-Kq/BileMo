@@ -37,6 +37,11 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="string", length=3, nullable=true)
+     */
+    private $currency;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +79,18 @@ class Product
     public function setPrice(?float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?string $currency): self
+    {
+        $this->currency = $currency;
 
         return $this;
     }

@@ -70,6 +70,7 @@ class AppFixtures extends Fixture
             $product->setName($productName);
             $product->setPrice($price . '.' . $cents);
             $product->setAvailability(true);
+            $product->setCurrency('EUR');
             $manager->persist($product);
         }
 

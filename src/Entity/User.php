@@ -12,7 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}}
+ *     denormalizationContext={"groups"={"user:write"}},
+ *     itemOperations={"get"={"security"="is_granted('get', object)"}, "put", "patch", "delete"},
  * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(

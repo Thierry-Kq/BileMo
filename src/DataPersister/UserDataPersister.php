@@ -4,6 +4,7 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\User;
+use App\Exception\UserNotOwnedException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
@@ -29,6 +30,10 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
 
     public function persist($data, array $context = [])
     {
+        if (isset($context['item_operation_name'])) {
+            $this->checkAuthClient($data, $context);
+        }
+        // todo : if not new user, no need to setClient
         $client = $this->security->getUser();
 
         $data->setClient($client);
@@ -39,7 +44,16 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
 
     public function remove($data, array $context = [])
     {
+        $this->checkAuthClient($data, $context);
+
         $this->entityManager->remove($data);
         $this->entityManager->flush();
+    }
+
+    public function checkAuthClient($data, $context)
+    {
+        if ($this->security->getUser() !== $data->getClient()) {
+            throw new UserNotOwnedException('Cet utilisateur ne vous appartient pas.');
+        }
     }
 }
